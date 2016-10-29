@@ -1,7 +1,7 @@
-package controller;
+package ua.com.asterix.xo.controller;
 
-import model.Field;
-import model.Figure;
+import ua.com.asterix.xo.model.Field;
+import ua.com.asterix.xo.model.Figure;
 
 public class CurrentMoveController {
 

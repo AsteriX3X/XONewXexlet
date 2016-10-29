@@ -1,6 +1,6 @@
-package view;
+package ua.com.asterix.xo.view;
 
-import model.Game;
+import ua.com.asterix.xo.model.Game;
 
 public class XOView {
 

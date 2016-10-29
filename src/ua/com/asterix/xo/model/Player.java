@@ -1,11 +1,12 @@
-package model;
+package ua.com.asterix.xo.model;
 
 public class Player {
 
-    private String name;
-    private Figure figure;
+    private final String name;
+    private final Figure figure;
 
-    public Player(String name, Figure figure) {
+    public Player(final String name,
+                  final Figure figure) {
         this.name = name;
         this.figure = figure;
     }

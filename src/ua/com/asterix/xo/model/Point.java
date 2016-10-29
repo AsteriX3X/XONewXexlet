@@ -1,4 +1,4 @@
-package model;
+package ua.com.asterix.xo.model;
 
 public class Point {
 
