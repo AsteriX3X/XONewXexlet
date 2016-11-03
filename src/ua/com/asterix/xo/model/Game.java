@@ -1,6 +1,7 @@
 package ua.com.asterix.xo.model;
 
 public class Game {
+
     private final Player[] players;
     private final Field field;
     private final String name;

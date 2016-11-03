@@ -1,7 +1,6 @@
 package ua.com.asterix.xo.model;
 
 public class Player {
-
     private final String name;
     private final Figure figure;
 

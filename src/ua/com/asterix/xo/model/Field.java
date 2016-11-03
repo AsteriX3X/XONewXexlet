@@ -5,12 +5,16 @@ import ua.com.asterix.xo.exceptions.InvalidPointException;
 public class Field {
 
     private final static int FIELD_SIZE = 3;
-    private static final int MIN_COORDINATE = 0;
-    private static final int MAX_COORDINATE = FIELD_SIZE;
+    private final static int MIN_COORDINATE = 0;
+    private final static int MAX_COORDINATE = FIELD_SIZE;
     private final Figure[][] figuresField = new Figure[FIELD_SIZE][FIELD_SIZE];
 
     public static int getFieldSize() {
         return FIELD_SIZE;
+    }
+
+    public static int getMaxCoordinate() {
+        return MAX_COORDINATE;
     }
 
     public Figure getFigure(final Point point) throws InvalidPointException {
