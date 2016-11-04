@@ -3,8 +3,7 @@ package ua.com.asterix.xo.controller;
 import ua.com.asterix.xo.model.Field;
 import ua.com.asterix.xo.model.Figure;
 
-public class CurrentMoveController {
-
+public class CurrentPlayerController {
     private Field field;
     private Figure figure;
 

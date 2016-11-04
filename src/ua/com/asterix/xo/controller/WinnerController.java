@@ -6,13 +6,12 @@ import ua.com.asterix.xo.model.Figure;
 import ua.com.asterix.xo.model.Point;
 
 public class WinnerController {
-
     public Figure getWinner(Field field) throws InvalidPointException {
         for (int i = 0; i < Field.getMaxCoordinate(); i++) {
-            if (checkLine(field, i)) {
+            if (isLineWin(field, i)) {
                 return field.getFigure(new Point(i, 0));
             }
-            if (checkRow(field, i)) {
+            if (isRowWin(field, i)) {
                 return field.getFigure(new Point(0, i));
             }
         }
@@ -30,30 +29,20 @@ public class WinnerController {
         return null;
     }
 
-    boolean checkLine(Field field, int lineNumber) {
-        try {
-            if (field.getFigure(new Point(0, lineNumber)) == null) {
-                return false;
-            }
-            return (field.getFigure(new Point(lineNumber, 0)) == field.getFigure(new Point(lineNumber, 1)) &&
-                    field.getFigure(new Point(lineNumber, 0)) == field.getFigure(new Point(lineNumber, 2)));
-        } catch (InvalidPointException e) {
-            e.printStackTrace();
+    private boolean isLineWin(Field field, int lineNumber) throws InvalidPointException {
+        if (field.getFigure(new Point(0, lineNumber)) == null) {
+            return false;
         }
-        return false;
+        return (field.getFigure(new Point(lineNumber, 0)) == field.getFigure(new Point(lineNumber, 1)) &&
+                field.getFigure(new Point(lineNumber, 0)) == field.getFigure(new Point(lineNumber, 2)));
     }
 
-    boolean checkRow(Field field, int rowNumber) {
-        try {
-            if (field.getFigure(new Point(0, rowNumber)) == null) {
-                return false;
-            }
-            return (field.getFigure(new Point(0, rowNumber)) == field.getFigure(new Point(1, rowNumber)) &&
-                    field.getFigure(new Point(0, rowNumber)) == field.getFigure(new Point(2, rowNumber)));
-        } catch (InvalidPointException e) {
-            e.printStackTrace();
+    private boolean isRowWin(Field field, int rowNumber) throws InvalidPointException {
+        if (field.getFigure(new Point(0, rowNumber)) == null) {
+            return false;
         }
-        return false;
+        return (field.getFigure(new Point(0, rowNumber)) == field.getFigure(new Point(1, rowNumber)) &&
+                field.getFigure(new Point(0, rowNumber)) == field.getFigure(new Point(2, rowNumber)));
     }
 
 }
