@@ -7,7 +7,7 @@ import ua.com.asterix.xo.model.Point;
 
 public class WinnerController {
     public Figure getWinner(Field field) throws InvalidPointException {
-        for (int i = 0; i < Field.getMaxCoordinate(); i++) {
+        for (int i = 0; i < Field.FIELD_SIZE_X; i++) {
             if (isLineWin(field, i)) {
                 return field.getFigure(new Point(i, 0));
             }
@@ -25,7 +25,6 @@ public class WinnerController {
                 field.getFigure(new Point(1, 1)) == field.getFigure(new Point(2, 0))) {
             return field.getFigure(new Point(1, 1));
         }
-
         return null;
     }
 

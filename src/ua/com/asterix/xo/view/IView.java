@@ -1,26 +1,19 @@
 package ua.com.asterix.xo.view;
 
-import ua.com.asterix.xo.controller.GameController;
-import ua.com.asterix.xo.model.Point;
-
 public interface IView {
 
-        Point startTurn();
+    void showGameName();
 
-        void showGameName();
+    void showField();
 
-        void showPlayers();
+    void showPointOccupied();
 
-        void showField();
+    void showWinner();
 
-        void showWinner();
+    void showGameOver();
 
-        void showDraw();
-
-        void anotherGame();
-
-        void showPointOccupied();
-
-        GameController getGameController();
+//        void showPlayers();
+//        Point startTurn();
+//        GameController getGameController();
 
 }

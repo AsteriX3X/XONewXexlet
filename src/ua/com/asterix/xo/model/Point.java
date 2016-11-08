@@ -1,8 +1,10 @@
 package ua.com.asterix.xo.model;
 
+import java.util.Random;
+
 public class Point {
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
     public Point(int x, int y) {
         this.x = x;
@@ -15,6 +17,10 @@ public class Point {
 
     public int getY() {
         return y;
+    }
+
+    public static Point getRandomShootPoint() {
+        return new Point(new Random().nextInt(Field.FIELD_SIZE_X), new Random().nextInt(Field.FIELD_SIZE_Y));
     }
 
 }

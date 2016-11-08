@@ -1,18 +1,18 @@
 package ua.com.asterix.xo.view;
 
-import ua.com.asterix.xo.controller.GameController;
 import ua.com.asterix.xo.model.Field;
-import ua.com.asterix.xo.model.Point;
 
-public class ConsoleView implements IView{
+public class ConsoleView implements IView {
+    public Field field = new Field();
 
+    @Override
     public void showField() {
-        for (int y = 0; y < Field.getFieldSize(); y++) {
-            showLine(game.getField(), y);
+        for (int y = 0; y < Field.FIELD_SIZE_Y; y++) {
+            showLine(field, y);
             System.out.println();
 
             if (y < 2) {
-                printLine(Field.getFieldSize());
+                printLine(Field.FIELD_SIZE_Y);
                 System.out.println();
             }
         }
@@ -25,24 +25,19 @@ public class ConsoleView implements IView{
     }
 
     private void showLine(Field field, int y) {
-        for (int x = 0; x < Field.getFieldSize(); x++) {
+        for (int x = 0; x < Field.FIELD_SIZE_X; x++) {
             System.out.print(field.getFieldOfFigures()[x][y] + " ");
             System.out.print(x < 2 ? "| " : "  ");
         }
     }
 
     @Override
-    public Point startTurn() {
-        return null;
+    public void showPointOccupied() {
+
     }
 
     @Override
     public void showGameName() {
-
-    }
-
-    @Override
-    public void showPlayers() {
 
     }
 
@@ -52,22 +47,7 @@ public class ConsoleView implements IView{
     }
 
     @Override
-    public void showDraw() {
-
-    }
-
-    @Override
-    public void anotherGame() {
-
-    }
-
-    @Override
-    public void showPointOccupied() {
-
-    }
-
-    @Override
-    public GameController getGameController() {
-        return null;
+    public void showGameOver() {
+        System.out.println("Победил");
     }
 }

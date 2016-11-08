@@ -1,4 +1,7 @@
-package ua.com.asterix.xo.model;
+package ua.com.asterix.xo.trash;
+
+import ua.com.asterix.xo.model.Field;
+import ua.com.asterix.xo.model.gamers.Player;
 
 public class Game {
 
