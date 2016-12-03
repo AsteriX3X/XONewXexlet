@@ -33,21 +33,20 @@ public class ConsoleView implements IView {
 
     @Override
     public void showPointOccupied() {
+        System.out.println("Уже занято, выберите другое поле");
+    }
 
+    public void showGameName(String gameName) {
+        System.out.printf("Добро пожаловать в %s", gameName);
     }
 
     @Override
-    public void showGameName() {
-
-    }
-
-    @Override
-    public void showWinner() {
-
+    public void showWinner(String winnerName) {
+        System.out.printf("Победил игрок %s", winnerName);
     }
 
     @Override
     public void showGameOver() {
-        System.out.println("Победил");
+        System.out.printf("Победила дружба");
     }
 }

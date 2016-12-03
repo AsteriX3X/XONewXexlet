@@ -1,6 +1,5 @@
 package ua.com.asterix.xo.controller;
 
-import junit.framework.TestCase;
 import org.junit.Test;
 import ua.com.asterix.xo.model.Field;
 import ua.com.asterix.xo.model.Figure;
@@ -19,7 +18,6 @@ public class WinnerControllerTest {
         field.setFigure(new Point(2, 0), Figure.X);
         field.setFigure(new Point(2, 1), Figure.X);
         field.setFigure(new Point(2, 2), Figure.X);
-        assert
     }
 
     @Test

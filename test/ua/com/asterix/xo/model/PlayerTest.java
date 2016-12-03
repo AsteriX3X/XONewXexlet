@@ -2,6 +2,7 @@ package ua.com.asterix.xo.model;
 
 import junit.framework.TestCase;
 import org.junit.Test;
+import ua.com.asterix.xo.model.gamers.Player;
 
 public class PlayerTest {
     @Test

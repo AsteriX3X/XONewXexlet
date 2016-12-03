@@ -1,25 +1,32 @@
 package ua.com.asterix.xo.view;
 
-import ua.com.asterix.xo.controller.MoveController;
 import ua.com.asterix.xo.model.Field;
-import ua.com.asterix.xo.model.Point;
 import ua.com.asterix.xo.trash.MyPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 public class WindowView extends JFrame implements IView {
     private Field field = new Field();
     private JButton[][] buttons = new JButton[Field.FIELD_SIZE_X][Field.FIELD_SIZE_Y];
     private JPanel settings = new JPanel();
     private JPanel gameField = new JPanel();
+    private JPanel statusBar = new JPanel();
+//    private String gameName = new Game().getGameName();
+
+    public WindowView(){
+        start();
+    }
 
     public void start() {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        setTitle(gameName);
+        setTitle("Тест");
         setSize(600, 600);
-        showGameName();
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        createMenuBar();
 
         settings.add(new JButton("Игрок против игрока"));
         settings.add(new JButton("Игрок против компьютера"));
@@ -33,33 +40,59 @@ public class WindowView extends JFrame implements IView {
         setVisible(true);
     }
 
-    @Override
-    public void showGameName() {
-        setTitle("XO Game v4 + GUI by -=AsteriX=-");
+    public void createMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu menu = new JMenu("Меню");
+        menu.setMnemonic(KeyEvent.VK_M);
+        menu.setToolTipText("Меню");
+
+        JMenuItem about = new JMenuItem("О программе");
+        menu.setMnemonic(KeyEvent.VK_O);
+        about.setToolTipText("О программе");
+        about.addActionListener((ActionEvent event) -> {
+            AboutWindow aboutWindow = new AboutWindow();
+        } );
+
+        JMenuItem exit = new JMenuItem("Выход");
+        menu.setMnemonic(KeyEvent.VK_E);
+        exit.setToolTipText("Выход");
+        exit.addActionListener((ActionEvent event) -> System.exit(0));
+
+        JMenuItem reload = new JMenuItem("Рестарт");
+        reload.setMnemonic(KeyEvent.VK_R);
+        reload.setToolTipText("Рестарт игры");
+
+        menuBar.add(menu);
+        menu.add(reload);
+        menu.add(about);
+        menu.add(exit);
+
+        setJMenuBar(menuBar);
     }
 
     @Override
     public void showField() {
-        gameField.setLayout(new GridLayout(Field.FIELD_SIZE_X, Field.FIELD_SIZE_Y));
-
-        for (int i = 0; i < Field.FIELD_SIZE_X; i++)
-            for (int j = 0; j < Field.FIELD_SIZE_Y; j++) {
-                JButton jButton = new JButton(String.valueOf(field.getFigure(new Point(j, i))));
-                buttons[i][j] = jButton;
-                gameField.add(jButton);
-                int finalI = i;
-                int finalJ = j;
-                jButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        System.out.printf("Нажата кнопка [%d-%C]\n", finalI + 1, finalJ + 'А');
-
-                        MoveController.doShoot(new Point(finalI, finalJ));
-
-                        jButton.setText("X");
-                    }
-                });
-            }
+//        gameField.setLayout(new GridLayout(Field.FIELD_SIZE_X, Field.FIELD_SIZE_Y));
+//
+//        for (int x = 0; x < Field.FIELD_SIZE_X; x++)
+//            for (int y = 0; y < Field.FIELD_SIZE_Y; y++) {
+//                JButton jButton = new JButton(String.valueOf(field.getFigure(new Point(x, y))));
+//                buttons[x][y] = jButton;
+//                gameField.add(jButton);
+//                int finalX = x;
+//                int finalY = y;
+//                jButton.addActionListener(new ActionListener() {
+//                    @Override
+//                    public void actionPerformed(ActionEvent actionEvent) {
+//                        System.out.printf("Нажата кнопка [%d-%C]\n", finalX + 1, finalY + 'А');
+//
+//                        MoveController.doShoot(new Point(finalX, finalY));
+//
+//                        jButton.setText("X");
+//                    }
+//                });
+//            }
     }
 
     @Override
@@ -68,7 +101,7 @@ public class WindowView extends JFrame implements IView {
     }
 
     @Override
-    public void showWinner() {
+    public void showWinner(String winnerName) {
 
     }
 
