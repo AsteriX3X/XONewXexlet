@@ -10,8 +10,13 @@ public class Player extends Gamer {
     }
 
     @Override
-    public Point getShoot() {
-        return shoot;
+    public Point getShootRandom() {
+        return Point.getRandomShootPoint();
+    }
+
+    @Override
+    public Point getShoot(int x, int y) {
+        return new Point(x, y);
     }
 
 }

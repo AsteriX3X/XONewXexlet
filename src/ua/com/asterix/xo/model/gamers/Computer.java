@@ -10,8 +10,13 @@ public class Computer extends Gamer {
     }
 
     @Override
-    public Point getShoot() {
+    public Point getShootRandom() {
         return Point.getRandomShootPoint();
+    }
+
+    @Override
+    public Point getShoot(int x, int y) {
+        return new Point(x, y);
     }
 
 }
