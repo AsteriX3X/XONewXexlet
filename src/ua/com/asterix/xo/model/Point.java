@@ -20,7 +20,7 @@ public class Point {
     }
 
     public static Point getRandomShootPoint() {
-        return new Point(new Random().nextInt(Field.FIELD_SIZE_X), new Random().nextInt(Field.FIELD_SIZE_Y));
+        return new Point(new Random().nextInt(Field.FIELD_SIZE), new Random().nextInt(Field.FIELD_SIZE));
     }
 
 }
