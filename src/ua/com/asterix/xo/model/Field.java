@@ -1,10 +1,8 @@
 package ua.com.asterix.xo.model;
 
 public class Field {
-    public static final int FIELD_SIZE_X = 3;
-    public static final int FIELD_SIZE_Y = 3;
-    public static final int MIN_COORDINATE = 0;
-    private final Figure[][] fieldOfFigures = new Figure[FIELD_SIZE_X][FIELD_SIZE_Y];
+    public static final int FIELD_SIZE = 3;
+    private final Figure[][] fieldOfFigures = new Figure[FIELD_SIZE][FIELD_SIZE];
 
     public Field() {
     }
@@ -14,20 +12,25 @@ public class Field {
     }
 
     public Figure getFigure(final Point point) {
-        // TODO: 08.11.2016
-//        if (!isPointValid(point));
+        if (!isPointValid(point)) {
+            System.out.println("Не верные координаты точки");   // TODO: 12.12.2016
+        }
         return fieldOfFigures[point.getX()][point.getY()];
     }
 
     public void setFigure(final Point point, final Figure figure) {
-//        if (!isPointValid(point));
-        // TODO: 08.11.2016
+        if (!isPointValid(point)) {
+            System.out.println("Не верные координаты точки");   // TODO: 12.12.2016
+        }
+        if (!isPointOccupied(point)) {
+            System.out.println("Эта ячейка уже занята, выберите другую");   // TODO: 12.12.2016
+        }
         fieldOfFigures[point.getX()][point.getY()] = figure;
     }
 
     public boolean isFieldFull() {
-        for (int x = 0; x < FIELD_SIZE_X; x++) {
-            for (int y = 0; y < FIELD_SIZE_Y; y++) {
+        for (int x = 0; x < FIELD_SIZE; x++) {
+            for (int y = 0; y < FIELD_SIZE; y++) {
                 if (fieldOfFigures[x][y] != null)
                     return false;
             }
@@ -35,16 +38,16 @@ public class Field {
         return true;
     }
 
+    private boolean isPointOccupied(final Point point) {
+        return fieldOfFigures[point.getX()][point.getY()] != null;
+    }
+
     private boolean isPointValid(final Point point) {
-        return isXCoordinateValid(point.getX()) && isYCoordinateValid(point.getY());
+        return isCoordinateValid(point.getX()) && isCoordinateValid(point.getY());
     }
 
-    private boolean isXCoordinateValid(final int coordinate) {
-        return coordinate >= MIN_COORDINATE && coordinate < FIELD_SIZE_X;
-    }
-
-    private boolean isYCoordinateValid(final int coordinate) {
-        return coordinate >= MIN_COORDINATE && coordinate < FIELD_SIZE_Y;
+    private boolean isCoordinateValid(final int Coordinate) {
+        return Coordinate >= 0 && Coordinate < FIELD_SIZE;
     }
 
 }
