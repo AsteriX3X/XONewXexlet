@@ -8,7 +8,6 @@ public class CurrentPlayerController {
     private Figure figure;
 
     public Figure currentMove(Field field) {
-
         return figure;
     }
 

@@ -10,7 +10,7 @@ import java.awt.event.KeyEvent;
 
 public class WindowView extends JFrame implements IView {
     private Field field = new Field();
-    private JButton[][] buttons = new JButton[Field.FIELD_SIZE_X][Field.FIELD_SIZE_Y];
+    private JButton[][] buttons = new JButton[Field.FIELD_SIZE][Field.FIELD_SIZE];
     private JPanel settings = new JPanel();
     private JPanel gameField = new JPanel();
     private JPanel statusBar = new JPanel();
@@ -32,7 +32,7 @@ public class WindowView extends JFrame implements IView {
         settings.add(new JButton("Игрок против компьютера"));
         settings.add(new JButton("Компьютер против компьютера"));
 
-        showField();
+        showField(field);
 
         add(settings, BorderLayout.NORTH);
         add(new MyPanel(), BorderLayout.SOUTH);
@@ -72,10 +72,20 @@ public class WindowView extends JFrame implements IView {
     }
 
     @Override
-    public void showField() {
-//        gameField.setLayout(new GridLayout(Field.FIELD_SIZE_X, Field.FIELD_SIZE_Y));
+    public void getGameType() {
+
+    }
+
+    @Override
+    public void showRules() {
+
+    }
+
+    @Override
+    public void showField(Field field) {
+//        gameField.setLayout(new GridLayout(Field.FIELD_SIZE, Field.FIELD_SIZE_Y));
 //
-//        for (int x = 0; x < Field.FIELD_SIZE_X; x++)
+//        for (int x = 0; x < Field.FIELD_SIZE; x++)
 //            for (int y = 0; y < Field.FIELD_SIZE_Y; y++) {
 //                JButton jButton = new JButton(String.valueOf(field.getFigure(new Point(x, y))));
 //                buttons[x][y] = jButton;
@@ -93,6 +103,16 @@ public class WindowView extends JFrame implements IView {
 //                    }
 //                });
 //            }
+    }
+
+    @Override
+    public void getShoot() {
+
+    }
+
+    @Override
+    public void showInvalidPoint() {
+
     }
 
     @Override

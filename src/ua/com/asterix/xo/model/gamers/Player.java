@@ -1,5 +1,6 @@
 package ua.com.asterix.xo.model.gamers;
 
+import ua.com.asterix.xo.model.Field;
 import ua.com.asterix.xo.model.Figure;
 import ua.com.asterix.xo.model.Point;
 
@@ -10,8 +11,8 @@ public class Player extends Gamer {
     }
 
     @Override
-    public Point getShootRandom() {
-        return Point.getRandomShootPoint();
+    public Point getShoot() {
+        return Field.getRandomPoint();
     }
 
     @Override
