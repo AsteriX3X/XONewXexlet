@@ -1,7 +1,6 @@
 package ua.com.asterix.xo.view;
 
 import ua.com.asterix.xo.model.Field;
-import ua.com.asterix.xo.trash.MyPanel;
 
 import javax.swing.*;
 import java.awt.*;
