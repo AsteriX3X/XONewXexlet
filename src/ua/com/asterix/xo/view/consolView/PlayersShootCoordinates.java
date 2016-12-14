@@ -1,11 +1,11 @@
-package ua.com.asterix.xo.controller;
+package ua.com.asterix.xo.view.consolView;
 
 import ua.com.asterix.xo.model.Field;
 import ua.com.asterix.xo.model.gamers.Gamer;
 
 import java.util.Scanner;
 
-public class InputPlayersShootCoordinates {
+public class PlayersShootCoordinates {
 
     public static int inputX(Gamer gamer) {
         int x;

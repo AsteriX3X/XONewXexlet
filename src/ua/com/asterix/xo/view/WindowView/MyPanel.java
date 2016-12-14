@@ -1,4 +1,4 @@
-package ua.com.asterix.xo.trash;
+package ua.com.asterix.xo.view.WindowView;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,10 +1,6 @@
-package ua.com.asterix.xo.controller;
+package ua.com.asterix.xo.model;
 
-import ua.com.asterix.xo.model.Field;
-import ua.com.asterix.xo.model.Figure;
-import ua.com.asterix.xo.model.Point;
-
-public class WinnerController {
+public class Winner {
 
     public static Figure getWinnerFigure(Field field) {
         int count = 0;

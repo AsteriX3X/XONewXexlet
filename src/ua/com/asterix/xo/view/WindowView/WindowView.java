@@ -1,6 +1,9 @@
-package ua.com.asterix.xo.view;
+package ua.com.asterix.xo.view.WindowView;
 
-import ua.com.asterix.xo.model.Field;
+import ua.com.asterix.xo.model.*;
+import ua.com.asterix.xo.model.Point;
+import ua.com.asterix.xo.model.gamers.Gamer;
+import ua.com.asterix.xo.view.IView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -71,12 +74,22 @@ public class WindowView extends JFrame implements IView {
     }
 
     @Override
-    public void getGameType() {
+    public void showGreettings(String gameName) {
 
     }
 
     @Override
-    public void showRules() {
+    public void showGameTypeMenu() {
+
+    }
+
+    @Override
+    public void selectGameType(Gamer[] players) {
+
+    }
+
+    @Override
+    public void showRules(Gamer[] gamers) {
 
     }
 
@@ -105,8 +118,13 @@ public class WindowView extends JFrame implements IView {
     }
 
     @Override
-    public void getShoot() {
+    public Point getShootAuto(Gamer players, Field field) {
+        return null;
+    }
 
+    @Override
+    public Point getShootManual(Gamer player, Field field) {
+        return null;
     }
 
     @Override
@@ -120,7 +138,7 @@ public class WindowView extends JFrame implements IView {
     }
 
     @Override
-    public void showWinner(String winnerName) {
+    public void showWinner(Gamer[] players, Field field) {
 
     }
 

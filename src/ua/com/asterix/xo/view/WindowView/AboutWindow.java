@@ -1,4 +1,4 @@
-package ua.com.asterix.xo.view;
+package ua.com.asterix.xo.view.WindowView;
 
 import javax.swing.*;
 
