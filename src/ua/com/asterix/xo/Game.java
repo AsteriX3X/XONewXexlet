@@ -1,5 +1,7 @@
 package ua.com.asterix.xo;
 
+import ua.com.asterix.xo.controller.InputPlayersShootCoordinates;
+import ua.com.asterix.xo.controller.WinnerController;
 import ua.com.asterix.xo.model.Field;
 import ua.com.asterix.xo.model.Figure;
 import ua.com.asterix.xo.model.Point;
@@ -9,13 +11,14 @@ import ua.com.asterix.xo.model.gamers.Player;
 
 import java.util.Scanner;
 
-public class Game {
+class Game {
     private final Gamer[] players = new Gamer[2];
     private final Field field = new Field();
     private final String GAME_NAME = "XO Game v5.0";
     private int gameType = 0;
+    private Point point;
 
-    public void start() {
+    void start() {
         String greeting = "Добро пожаловать в " + GAME_NAME;
         System.out.println(greeting);
         for (int i = 0; i < greeting.length(); i++) {
@@ -78,14 +81,17 @@ public class Game {
             showRules(gamer1, gamer2);
             if (isGamerShootWasFinal(gamer2)) break;
         }
-        showField(field);
+        Field.showField(field);
 
-        if (field.isFieldFull()) {
-            System.out.println("Победила дружба!");
+        if (field.isFieldFull() && !WinnerController.isWinner(field)) {
+            System.out.println("Ничья! Победила дружба!");
         } else {
-            System.out.println("Победил %s");
+            if (WinnerController.getWinnerFigure(field) == Figure.X) {
+                System.out.printf("Победил %s", gamer1.getName());
+            } else {
+                System.out.printf("Победил %s", gamer2.getName());
+            }
         }
-
     }
 
     private void showRules(Gamer gamer1, Gamer gamer2) {
@@ -94,12 +100,11 @@ public class Game {
     }
 
     private boolean isGamerShootWasFinal(Gamer gamer) {
-        showField(field);
+        Field.showField(field);
         if (gamer.getName().equals("Компьютер") || gamer.getName().equals("Компьютер 1") || gamer.getName().equals("Компьютер 2")) {
             System.out.printf("Сделать ход за %s, символом %S", gamer.getName(), gamer.getFigure());
             new Scanner(System.in).nextLine();
 
-            Point point;
             do {
                 point = gamer.getShoot();
             }
@@ -107,100 +112,18 @@ public class Game {
 
             field.setFigure(point, gamer.getFigure());
         } else {
-            int x = inputX(gamer);
-            int y = inputY(gamer);
-            field.setFigure(new Point(x, y), gamer.getFigure());
-        }
 
-        return field.isFieldFull() || isWinner(field);
-    }
+            do {
+                point = new Point(InputPlayersShootCoordinates.inputX(gamer), InputPlayersShootCoordinates.inputY(gamer));
 
-    private int inputY(Gamer gamer) {
-        int x = 0;
-        do {
-            try {
-                System.out.printf("%s, введите координату выстрела от 1 до %d: ", gamer.getName(), Field.FIELD_SIZE);
-                x = Integer.parseInt(new Scanner(System.in).nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Нельзя вводить буквы и не целые числа");
-            }
-            if (x < 1 || x > Field.FIELD_SIZE) {
-                System.out.println("Цифра должна быть от 1 до " + Field.FIELD_SIZE);
-            }
-        } while (x < 1 || x > Field.FIELD_SIZE);
-        return x - 1;
-    }
-
-    private int inputX(Gamer gamer) {
-        int y;
-        do {
-            System.out.printf("%s, введите координату выстрела от А до %C: ", gamer.getName(), 1071 + Field.FIELD_SIZE);
-            y = new Scanner(System.in).nextLine().toLowerCase().codePointAt(0) - 1071;
-            if (y < 1 || y > Field.FIELD_SIZE) {
-                System.out.printf("Не верный ввод, нужно ввести русскую букву от А до %C\n", 1071 + Field.FIELD_SIZE);
-            }
-        } while (y < 1 || y > Field.FIELD_SIZE);
-        return y - 1;
-    }
-
-    public void showField(Field field) {
-        System.out.print(" ");
-        for (char l = 'А'; l < 'А' + Field.FIELD_SIZE; l++) {
-            System.out.print("  " + l);
-        }
-        System.out.println();
-        for (int y = 0; y < Field.FIELD_SIZE; y++) {
-            System.out.print(y + 1);
-            for (int x = 0; x < Field.FIELD_SIZE; x++) {
-                if (field.getFigure(new Point(x, y)) == null) {
-                    System.out.print("  " + ".");
-                } else {
-                    System.out.print("  " + field.getFigure(new Point(x, y)));
+                if (!field.isPointEmpty(point)){
+                    System.out.println("Уже занято, выберите другое поле");
                 }
-            }
-            System.out.println();
-        }
-    }
+            } while (!field.isPointEmpty(point));
 
-    public boolean isWinner(Field field) {
-        for (int i = 0; i < Field.FIELD_SIZE; i++) {
-            if (isLineWin(field, i)) {
-                return true;
-            }
-            if (isRowWin(field, i)) {
-                return true;
-            }
+            field.setFigure(point, gamer.getFigure());
         }
-
-        if (field.getFigure(new Point(0, 0)) == field.getFigure(new Point(1, 1)) &&
-                field.getFigure(new Point(0, 0)) == field.getFigure(new Point(2, 2)) &&
-                field.getFigure(new Point(0, 0)) != null) {
-            return true;
-        }
-
-        if (field.getFigure(new Point(0, 2)) == field.getFigure(new Point(1, 1)) &&
-                field.getFigure(new Point(1, 1)) == field.getFigure(new Point(2, 0)) &&
-                field.getFigure(new Point(1, 1)) != null) {
-            return true;
-        }
-
-        return false;
-    }
-
-    private boolean isLineWin(Field field, int lineNumber) {
-        if (field.getFigure(new Point(lineNumber, 0)) == null) {
-            return false;
-        }
-        return (field.getFigure(new Point(lineNumber, 0)) == field.getFigure(new Point(lineNumber, 1)) &&
-                field.getFigure(new Point(lineNumber, 0)) == field.getFigure(new Point(lineNumber, 2)));
-    }
-
-    private boolean isRowWin(Field field, int rowNumber) {
-        if (field.getFigure(new Point(0, rowNumber)) == null) {
-            return false;
-        }
-        return (field.getFigure(new Point(0, rowNumber)) == field.getFigure(new Point(1, rowNumber)) &&
-                field.getFigure(new Point(0, rowNumber)) == field.getFigure(new Point(2, rowNumber)));
+        return field.isFieldFull() || WinnerController.isWinner(field);
     }
 
 }

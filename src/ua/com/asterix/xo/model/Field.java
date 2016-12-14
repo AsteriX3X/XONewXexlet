@@ -9,6 +9,25 @@ public class Field {
     public Field() {
     }
 
+    public static void showField(Field field) {
+        System.out.print(" ");
+        for (char l = 'А'; l < 'А' + Field.FIELD_SIZE; l++) {
+            System.out.print("  " + l);
+        }
+        System.out.println();
+        for (int y = 0; y < Field.FIELD_SIZE; y++) {
+            System.out.print(y + 1);
+            for (int x = 0; x < Field.FIELD_SIZE; x++) {
+                if (field.getFigure(new Point(x, y)) == null) {
+                    System.out.print("  " + ".");
+                } else {
+                    System.out.print("  " + field.getFigure(new Point(x, y)));
+                }
+            }
+            System.out.println();
+        }
+    }
+
     public Figure[][] getFieldOfFigures() {
         return fieldOfFigures;
     }
@@ -39,12 +58,12 @@ public class Field {
         return new Point(new Random().nextInt(Field.FIELD_SIZE), new Random().nextInt(Field.FIELD_SIZE));
     }
 
-    public static boolean isPointValid(final Point point) {
-        return isCoordinateValid(point.getX()) && isCoordinateValid(point.getY());
-    }
-
-    private static boolean isCoordinateValid(final int Coordinate) {
-        return Coordinate >= 0 && Coordinate < FIELD_SIZE;
-    }
+//    public static boolean isPointValid(final Point point) {
+//        return isCoordinateValid(point.getX()) && isCoordinateValid(point.getY());
+//    }
+//
+//    private static boolean isCoordinateValid(final int Coordinate) {
+//        return Coordinate >= 0 && Coordinate < FIELD_SIZE;
+//    }
 
 }
