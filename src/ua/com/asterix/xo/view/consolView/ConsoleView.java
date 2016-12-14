@@ -14,10 +14,6 @@ import java.util.Scanner;
 public class ConsoleView implements IView {
     private Point point;
 
-    public void showGameName(String gameName) {
-        System.out.printf("Добро пожаловать в %s", gameName);
-    }
-
     @Override
     public void showGreettings(String gameName) {
         String greeting = "Добро пожаловать в " + gameName;
@@ -33,7 +29,7 @@ public class ConsoleView implements IView {
         System.out.println("1 - Компьютер против Компьютера");
         System.out.println("2 - Игрок против Компьютера");
         System.out.println("3 - Игрок против Игрока");
-        System.out.println("==============================");
+        System.out.println("==============================================");
         System.out.println("4 - Выход");
         System.out.print("Выберите тип игры (1, 2, 3) или 4 для выхода: ");
     }
@@ -48,30 +44,28 @@ public class ConsoleView implements IView {
                 System.out.println("Вводить можно только целое число");
             }
             if (gameType < 1 || gameType > 4) {
-                System.out.println("Нужно ввести цифру 1, 2 или 3");
+                System.out.println("Нужно ввести цифру 1, 2, 3 или 4");
             }
         }
-
-        System.out.print("Выбан режим: - ");
         initPlayers(players, gameType);
     }
 
     private void initPlayers(Gamer[] players, int gameType) {
         switch (gameType) {
             case 1:
+                System.out.println("Режим - Компьютер против Компьютера");
                 players[0] = new Computer("Компьютер 1", Figure.X);
                 players[1] = new Computer("Компьютер 2", Figure.O);
-                System.out.println("Компьютер против Компьютера");
                 break;
             case 2:
+                System.out.println("Режим - Игрок против Компьютера");
                 players[0] = new Player("Игрок", Figure.X);
                 players[1] = new Computer("Компьютер", Figure.O);
-                System.out.println("Игрок против Компьютера");
                 break;
             case 3:
+                System.out.println("Режим - Игрок против Игрока");
                 players[0] = new Player("Игрок 1", Figure.X);
                 players[1] = new Player("Игрок 2", Figure.O);
-                System.out.println("Игрок против Игрока");
                 break;
             case 4:
                 System.out.println("Выход");

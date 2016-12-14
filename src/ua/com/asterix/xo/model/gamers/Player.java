@@ -15,9 +15,4 @@ public class Player extends Gamer {
         return Field.getRandomPoint();
     }
 
-    @Override
-    public Point getShoot(int x, int y) {
-        return new Point(x, y);
-    }
-
 }
